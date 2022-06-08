@@ -36,3 +36,4 @@ for file in tbl_order_files :
     order_all = pd.concat([order_all, order_data],ignore_index=True)
 
 order_all
+order_all.isnull().sum()
