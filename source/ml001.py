@@ -23,3 +23,30 @@ for file in tbl_order_files :
 
 order_all.isnull().sum()
 order_all.describe()
+order_all['total_amount'].describe()
+
+order_date = order_all.loc[order_all['store_id']!=999]
+order_data = pd.merge(order_data,m_store,on='store_id',how='left')
+order_date = pd.merge(order_data,m_area,on='area_cd',how='left')
+
+order_date.head()
+len(order_date)
+
+order_date.loc[order_data['takeout_flag']==0,'takeout_name'] = 'delivery'
+order_date.loc[order_data['takeout_flag']==1,'takeout_name'] = 'takeout'
+
+order_data.loc[order_data['status']==0,'status_name'] = '주문 접수'
+order_data.loc[order_data['status']==1,'status_name'] = '지불 완료'
+order_data.loc[order_data['status']==2,'status_name'] = '배달 완료'
+order_data.loc[order_data['status']==9,'status_name'] = '주문 취소'
+
+order_data['status']
+
+order_date[['takeout_flag','takeout_name']]
+order_data[['status','status_name']]
+
+output_dir = os.path.join(path,'output_data')
+os.makedirs(output_dir,exist_ok=True)
+
+output_file = os.path.join(output_dir,'order_data.csv')
+order_data.to_csv(output_file,index=False)
