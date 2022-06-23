@@ -1,5 +1,5 @@
 
-import  pandas as pd
+import pandas as pd
 import os
 import warnings
 import matplotlib.pyplot as plt
@@ -10,7 +10,7 @@ plt.rc('font',family='AppleGothic')
 plt.rc('axes',unicode_minus=False)
 
 warnings.filterwarnings('ignore')
-# path = os.getcwd()
+path = os.getcwd()
 path =  '/Users/baeseongho/PycharmProjects/pythonML'
 order_data = pd.read_csv(path+'/output_data/order_data.csv')
 order_data = order_data.loc[(order_data['status']==1)|(order_data['status']==2)]
